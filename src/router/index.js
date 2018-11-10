@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Help from '@/components/Help'
+import UploadImage from '@/components/UploadImage'
 
 Vue.use(Router)
 
@@ -13,9 +13,9 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/help',
-      name: 'help',
-      component: Help
+      path: '/uploadImage',
+      name: 'uploadImage',
+      component: UploadImage
     }
   ]
 })
