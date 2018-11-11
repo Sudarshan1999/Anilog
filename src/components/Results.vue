@@ -4,9 +4,9 @@
 
 	<div>
 
-		<!-- Animal: Lion -->
-		Name: Phoenix Zoo<br>
-		Coordinates: [33.4511924, -111.9480369]<br>
+		<br><br><br> Animal: {{animal}}<br> Place: Phoenix Zoo<br> Coordinates: {{location['lat'] ? location['lat']: ''}}, {{location['lng'] ? location['lng']: ''}}
+
+		<br><br><br>
 
 		<img :src="imageUrl">
 	</div>
@@ -23,11 +23,14 @@ export default {
 
 		// console.log(query)
 
-		// const url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/1200px-Lion_waiting_in_Namibia.jpg'
-		console.log(this.$route.params)
+		const animal = this.$route.params.animal
+		const location = this.$route.params.location
+
 		return {
 			// query,
 			imageUrl: 'https://i.imgur.com/omihjNj.png',
+			animal,
+			location,
 		}
 	},
 }
