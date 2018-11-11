@@ -14,11 +14,6 @@
 <script>
 export default {
 	name: 'UploadImage',
-	data: function() {
-		return {
-			url: '',
-		}
-	},
 	methods: {
 		onFileChanged(event) {
 			const file = event.target.files[0]
@@ -38,13 +33,10 @@ export default {
 					})
 			})
 		},
-		onUpload() {},
+		// onUpload() {},
 	},
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-@import '../assets/style/uploadImage.css';
-/* Add a black background color to the top navigation */
-</style>
+<style scoped></style>
