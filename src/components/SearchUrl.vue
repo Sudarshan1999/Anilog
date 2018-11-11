@@ -9,47 +9,55 @@
 		<br><br><br>
 
 		<div>
-			<h3>Upload an Image</h3>
-
-			<input type="file" @change="onFileChanged">
-			<button @click="onUpload">Upload!</button>
-
-			<!-- <input id="url" type="text" v-model="url" placeholder="Image URL"><br>
+			<h3>Search by URL</h3>
+			<input id="url" type="text" v-model="url" placeholder="Image URL"><br>
 			<button v-on:click="searchUrl">submit</button><br>
-			<img v-bind:src="url"> -->
-
+			<img v-bind:src="url">
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'UploadImage',
-	// data() {
-	// 	return {
-	// 		file: null,
-	// 	}
-	// },
+	name: 'SearchUrl',
+	data() {
+		return {
+			url: '',
+		}
+	},
 	methods: {
-		onFileChanged(event) {
-			const file = event.target.files[0]
-
+		searchUrl() {
 			const { clarifaiObject } = require('../constants/clarifai.js')
-			const { encodeAsURL } = require('../services/uploadImage.js')
 
-			encodeAsURL(file).then(base64 => {
-				console.log(base64)
+			var concepts,
+				names = [],
+				animal
+
+			var promise = new Promise((resolve, reject) => {
 				clarifaiObject.models
-					.predict(Clarifai.GENERAL_MODEL, {
-						base64: base64,
-					})
+					.predict(Clarifai.GENERAL_MODEL, this.url)
 					.then(response => {
-						// do something with response
-						console.log(response)
+						resolve(response['outputs'][0]['data']['concepts'])
 					})
 			})
+
+			promise.then(concepts => {
+				if (concepts != null) {
+					for (var i = 0; i < concepts.length; i++) {
+						names.push(concepts[i]['name'])
+					}
+					const AnimalNames = require('../Data/AnimalNames.json')
+
+					for (var i = 0; i < names.length; i++) {
+						if (AnimalNames.indexOf(names[i]) != -1) {
+							animal = names[i]
+							break
+						}
+					}
+					console.log(animal)
+				}
+			})
 		},
-		onUpload() {},
 	},
 }
 </script>
