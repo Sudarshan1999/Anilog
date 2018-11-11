@@ -1,11 +1,5 @@
 <template>
 	<div>
-		<div class="Navbar">
-			<a href="http://localhost:8080/#/">Home</a>
-			<a href="http://localhost:8080/#/searchUrl">Search by URL</a>
-			<a href="http://localhost:8080/#/uploadImage">Upload an Image</a>
-		</div>
-
 		<br><br><br>
 
 		<div>
@@ -27,12 +21,13 @@ export default {
 	},
 	methods: {
 		searchUrl() {
-			const { clarifaiObject } = require('../constants/clarifai.js')
-
+			const Clarifai = require('clarifai')
+			const clarifaiObject = new Clarifai.App({
+				apiKey: '806a013982f0402eb76adaa64b7a9acb',
+			})
 			var concepts,
 				names = [],
 				animal
-
 			var promise = new Promise((resolve, reject) => {
 				clarifaiObject.models
 					.predict(Clarifai.GENERAL_MODEL, this.url)
@@ -55,6 +50,45 @@ export default {
 						}
 					}
 					console.log(animal)
+					var GooglePlacesPromises = require('googleplaces-promises')
+					var placesPromises = new GooglePlacesPromises(
+						'AIzaSyBiXTklAzda7cc6iT5SjuvT7K-w8ZsX-wI'
+					)
+					var searchParams = {
+							location: [33.4512, -111.948],
+							types: 'zoos containing ' + animal,
+							input: 'zoos',
+						},
+						placeSearch = placesPromises.placeSearch(searchParams)
+					console.log(searchParams)
+					placeSearch
+						.then(function(response) {
+							console.log(response)
+							console.log(response['results'][0])
+						})
+						.fail(function(error) {
+							console.log(error)
+						})
+					// const rp = require('request-promise')
+					// var options = {
+					// uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
+					// qs: {
+					//     key: 'location=33.4242,-111.9281&radius=500&type=zoos%containgin%'+animal+'&key=AIzaSyBiXTklAzda7cc6iT5SjuvT7K-w8ZsX-wI'
+					//     // -> uri + '?access_token=xxxxx%20xxxxx'
+					// },
+					// headers: {
+					//     'User-Agent': 'Request-Promise'
+					// },
+					// json: true // Automatically parses the JSON string in the response
+					// };
+
+					// rp(options)
+					//     .then(function (response) {
+					//         console.log(response);
+					//     })
+					//     .catch(function (err) {
+					//         // API call failed...
+					//     });
 				}
 			})
 		},

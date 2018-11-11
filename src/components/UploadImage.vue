@@ -1,5 +1,4 @@
 <template>
-
 	<div>
 		<br><br><br>
 
@@ -7,15 +6,19 @@
 			<h3>Upload an Image</h3>
 
 			<input type="file" @change="onFileChanged">
-			<button @click="onUpload">Upload!</button>
+			<!-- <button @click="onUpload">Upload!</button> -->
 		</div>
 	</div>
-
 </template>
 
 <script>
 export default {
 	name: 'UploadImage',
+	data: function() {
+		return {
+			url: '',
+		}
+	},
 	methods: {
 		onFileChanged(event) {
 			const file = event.target.files[0]
