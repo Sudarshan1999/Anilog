@@ -6,6 +6,7 @@
         <a href="http://localhost:8080/#/">Home</a>
         <a href="http://localhost:8080/#/uploadImage">Search</a> 
   </div>
+  <br><br><br>
   <div class="hello">
     <img src="../assets/logo.png">
     <h1>{{ msg }}</h1>

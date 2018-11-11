@@ -8,6 +8,7 @@
             <h3>Upload Image</h3>
             <input id="url" type="text" v-model="url" placeholder="Image URL"><br>
             <button v-on:click="UploadImage">submit</button><br>
+            <img v-bind:src="url">
         </div>
     </div>
 </template>
