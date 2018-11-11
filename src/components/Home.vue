@@ -2,16 +2,16 @@
 	<div>
 
 		<!-- Header - set the background image for the header in the line below -->
-		<header class="py-5 bg-image-full" style="background-image: url('https://picsum.photos/1900/1080?image=1076');">
+		<header class="py-5 bg-image-full" style="background-image: url('../assets/Banner.png');">
 			<div style="height: 200px;"></div>
 		</header>
 
 		<!-- Content section -->
 		<section class="py-5">
 			<div class="container">
-				<h1>Search Image</h1>
-				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
+				<h1>Search Animal by Image URL</h1>
+				<p class="lead">Have a picture of an animal but not sure where to find more?</p>
+				<p>With Anilog, powered by Clarifai Image Recognition and GCP's Places and Maps API, each image uploaded is complared to a database of other animals. From there, we take our best guess at what that animal is and reccomend another place where that animal can be found.</p>
 			</div>
 		</section>
 
@@ -24,9 +24,9 @@
 		<!-- Content section -->
 		<section class="py-5">
 			<div class="container">
-				<h1>Upload Image</h1>
-				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
+				<h1>Find Animal through an Uploaded Image</h1>
+				<p class="lead">Take a picture of an animal but not sure where to find more?</p>
+				<p>With Anilog, powered by Clarifai Image Recognition and GCP's Places and Maps API, each image uploaded is complared to a database of other animals. From there, we take our best guess at what that animal is and reccomend another place where that animal can be found.</p>
 			</div>
 		</section>
 

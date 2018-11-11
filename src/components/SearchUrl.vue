@@ -40,6 +40,7 @@ export default {
 						}
 					}
 
+                    var info={}
 					console.log(animal)
 					var GooglePlacesPromises = require('googleplaces-promises')
 					var placesPromises = new GooglePlacesPromises(
@@ -55,11 +56,29 @@ export default {
 					placeSearch
 						.then(function(response) {
 							console.log(response)
-							console.log(response['results'][0])
-						})
+                            info['lat']=response['results'][1]['geometry']['location']['lat']
+                            info['lng']=response['results'][1]['geometry']['location']['lng']
+                            console.log(info['lat']+" "+info['lng'])
+
+                        })
 						.fail(function(error) {
 							console.log(error)
-						})
+                        })
+                        
+                        // var searchDetailParams = {
+                        //         id: info['id'],
+                        //         name: info['name']
+                        //     },
+                        //     placeDetailSearch = placesPromises.placeSearch(searchDetailParams);
+                        // console.log(searchDetailParams)
+                        // placeDetailSearch
+                        //     .then(function(response){
+                        //         console.log(response)
+                        //         console.log(response['results'])
+                        //     })
+                        //     .fail(function(error){
+                        //         console.log(error)
+                        //     })
 				}
 			})
 		},
