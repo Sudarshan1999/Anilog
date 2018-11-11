@@ -1,9 +1,10 @@
 <template>
     <div>
-        <div class="Navbar">
+       <!-- <div class="Navbar">
             <a href="http://localhost:8080/#/">Home</a>
             <a href="http://localhost:8080/#/uploadImage">Search</a> 
-        </div><br><br><br>
+        </div> -->
+        <br><br><br>
         <div>
             <h3>Upload Image</h3>
             <input id="url" type="text" v-model="url" placeholder="Image URL"><br>
