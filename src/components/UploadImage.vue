@@ -1,14 +1,14 @@
 <template>
-<div>
-<div class="Navbar">
-        <a href="http://localhost:8080/#/">Home</a>
-        <a href="http://localhost:8080/#/uploadImage">Search</a> 
-  </div>
     <div>
-        <h3>Upload Image</h3>
-        <input id="url" type="text" v-model="url" placeholder="Image URL"><br>
-        <button v-on:click="UploadImage">submit</button><br>
-    </div>
+        <div class="Navbar">
+            <a href="http://localhost:8080/#/">Home</a>
+            <a href="http://localhost:8080/#/uploadImage">Search</a> 
+        </div><br><br><br>
+        <div>
+            <h3>Upload Image</h3>
+            <input id="url" type="text" v-model="url" placeholder="Image URL"><br>
+            <button v-on:click="UploadImage">submit</button><br>
+        </div>
     </div>
 </template>
 
@@ -63,6 +63,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    @import '../assets/style/uploadImage.css';
 /* Add a black background color to the top navigation */
 .Navbar {
     
