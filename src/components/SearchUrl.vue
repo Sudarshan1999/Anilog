@@ -29,11 +29,6 @@ export default {
 
 			getConcepts(this.url).then(concepts => {
 				if (concepts != null) {
-					// old
-					// for (var i = 0; i < concepts.length; i++) {
-					// 	names.push(concepts[i]['name'])
-					// }
-
 					concepts.forEach(concept => names.push(concept['name']))
 
 					const animalNames = require('../data/animalNames.json')

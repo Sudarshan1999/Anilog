@@ -7,6 +7,8 @@
 
 			<input type="file" @change="onFileChanged">
 			<!-- <button @click="onUpload">Upload!</button> -->
+			<br>
+			{{animal}}
 		</div>
 	</div>
 </template>
@@ -14,23 +16,44 @@
 <script>
 export default {
 	name: 'UploadImage',
+	data() {
+		return {
+			animal: '',
+		}
+	},
 	methods: {
 		onFileChanged(event) {
 			const file = event.target.files[0]
 
-			const { clarifaiObject } = require('../constants/clarifai.js')
-			const { encodeAsURL } = require('../services/uploadImage.js')
+			const {
+				encodeAsURL,
+				getConceptsB64,
+			} = require('../services/uploadImage.js')
 
 			encodeAsURL(file).then(base64 => {
 				console.log(base64)
-				clarifaiObject.models
-					.predict(Clarifai.GENERAL_MODEL, {
-						base64: base64,
-					})
-					.then(response => {
-						// do something with response
-						console.log(response['outputs'][0]['data']['concepts'])
-					})
+				getConceptsB64(base64).then(concepts => {
+					console.log(concepts)
+					if (concepts != null) {
+						//
+
+						var concepts,
+							names = [],
+							animal
+
+						concepts.forEach(concept => names.push(concept['name']))
+
+						const animalNames = require('../data/animalNames.json')
+
+						for (var i = 0; i < names.length; i++) {
+							if (animalNames.indexOf(names[i]) != -1) {
+								this.animal = names[i]
+								break
+							}
+						}
+						console.log(animal)
+					}
+				})
 			})
 		},
 		// onUpload() {},
