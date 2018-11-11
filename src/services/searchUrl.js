@@ -2,7 +2,7 @@ const {
 	clarifaiObject
 } = require('../constants/clarifai.js')
 
-export function getConcepts(url) {
+export function getConceptsUrl(url) {
 	return new Promise((resolve, reject) => {
 		clarifaiObject.models
 			.predict(Clarifai.GENERAL_MODEL, url)

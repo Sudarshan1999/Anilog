@@ -2,14 +2,13 @@ const {
 	clarifaiObject
 } = require('../constants/clarifai.js')
 
+const animalNames = require('../data/animalNames.json')
+
 export function encodeAsURL(file) {
 	return new Promise((resolve, _reject) => {
 		var reader = new FileReader();
 		reader.onloadend = () => {
-			var k = reader.result
-			var i = k.indexOf(';') + 8
-			k = k.substring(i);
-			resolve(k)
+			resolve(reader.result.substring(reader.result.indexOf(';') + 8))
 		}
 		reader.readAsDataURL(file);
 	})
@@ -23,7 +22,24 @@ export function getConceptsB64(base64) {
 				base64
 			})
 			.then(response => {
-				resolve(response['outputs'][0]['data']['concepts']);
+				const concepts = response['outputs'][0]['data']['concepts'];
+				if (concepts) {
+					resolve(concepts);
+				}
 			})
+	})
+}
+
+export function getAnimal(concepts) {
+	return new Promise((resolve, _reject) => {
+		const candidates = concepts
+			.map(concept => concept['name'])
+			.filter((concept) => animalNames.indexOf(concept) != -1);
+
+		console.log(candidates.length + " candidates");
+		console.log(candidates)
+
+		resolve(candidates[0])
+
 	})
 }

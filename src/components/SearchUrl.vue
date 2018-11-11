@@ -21,7 +21,7 @@ export default {
 	},
 	methods: {
 		searchUrl() {
-			const { getConcepts } = require('../services/searchUrl.js')
+			const { getConceptsUrl } = require('../services/searchUrl.js')
 
 			var concepts,
 				names = [],
@@ -66,6 +66,3 @@ export default {
 	},
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
