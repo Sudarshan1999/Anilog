@@ -45,7 +45,7 @@ export default {
 					})
 					.then(response => {
 						// do something with response
-						console.log(response)
+						console.log(response['outputs'][0]['data']['concepts'])
 					})
 			})
 		},
