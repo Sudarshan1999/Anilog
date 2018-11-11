@@ -1,66 +1,47 @@
 <template>
-    <div>
-        <br><br><br>
-        <div>
-            <h3>Upload Image</h3>
-            <input id="url" type="text" v-model="url" placeholder="Image URL"><br>
-            <button v-on:click="UploadImage">submit</button><br>
-            <img v-bind:src="url">
-        </div>
-    </div>
+
+	<div>
+		<br><br><br>
+
+		<div>
+			<h3>Upload an Image</h3>
+
+			<input type="file" @change="onFileChanged">
+			<button @click="onUpload">Upload!</button>
+		</div>
+	</div>
+
 </template>
 
 <script>
 export default {
-    name: 'UploadImage',
-    data: function(){
-      
-    return{
-        url: ''
-    }
-    },
-    
-    methods:{
-        UploadImage: function(){
-            const Clarifai = require("clarifai");
-            const clarifaiObject = new Clarifai.App({
-            apiKey: '806a013982f0402eb76adaa64b7a9acb'
-            });
-            var concepts,names=[],animal;
-            var promise = new Promise((resolve, reject) => {    
-                clarifaiObject.models.predict(Clarifai.GENERAL_MODEL, this.url)
-                .then(response=>{
-                    resolve(response['outputs'][0]['data']['concepts']);
-                });
-            });
+	name: 'UploadImage',
+	methods: {
+		onFileChanged(event) {
+			const file = event.target.files[0]
 
-            promise.then((concepts) =>{
-                if(concepts!=null)
-                {
-                    for(var i=0;i<concepts.length;i++)
-                    {
-                        names.push(concepts[i]['name'])
-                    }
-                    const AnimalNames = require("../Data/AnimalNames.json")
+			const { clarifaiObject } = require('../constants/clarifai.js')
+			const { encodeAsURL } = require('../services/uploadImage.js')
 
-                    for(var i=0;i<names.length;i++)
-                    {
-                        if(AnimalNames.indexOf(names[i]) != -1)
-                        {
-                            animal=names[i];
-                            break;
-                        }
-                    }
-                    console.log(animal);
-                }
-            })
-        }
-    }
+			encodeAsURL(file).then(base64 => {
+				console.log(base64)
+				clarifaiObject.models
+					.predict(Clarifai.GENERAL_MODEL, {
+						base64: base64,
+					})
+					.then(response => {
+						// do something with response
+						console.log(response['outputs'][0]['data']['concepts'])
+					})
+			})
+		},
+		onUpload() {},
+	},
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    @import '../assets/style/uploadImage.css';
+@import '../assets/style/uploadImage.css';
 /* Add a black background color to the top navigation */
 </style>
