@@ -55,6 +55,43 @@ export default {
                         }
                     }
                     console.log(animal);
+                    var GooglePlacesPromises = require('googleplaces-promises');
+                    var placesPromises = new GooglePlacesPromises('AIzaSyBiXTklAzda7cc6iT5SjuvT7K-w8ZsX-wI');
+                    var searchParams = {
+                            location: [33.4512, -111.9480],
+                            types: "zoos containing "+animal,
+                            input: "zoos",
+                        },
+                    placeSearch = placesPromises.placeSearch(searchParams);
+                    console.log(searchParams)
+                    placeSearch
+                        .then(function(response){
+                            console.log(response)
+                            console.log(response['results'][0])
+                        })
+                        .fail(function(error){
+                            console.log(error)
+                        })
+                    // const rp = require('request-promise')
+                    // var options = {
+                    // uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
+                    // qs: {
+                    //     key: 'location=33.4242,-111.9281&radius=500&type=zoos%containgin%'+animal+'&key=AIzaSyBiXTklAzda7cc6iT5SjuvT7K-w8ZsX-wI' 
+                    //     // -> uri + '?access_token=xxxxx%20xxxxx'
+                    // },
+                    // headers: {
+                    //     'User-Agent': 'Request-Promise'
+                    // },
+                    // json: true // Automatically parses the JSON string in the response
+                    // };
+                
+                    // rp(options)
+                    //     .then(function (response) {
+                    //         console.log(response);
+                    //     })
+                    //     .catch(function (err) {
+                    //         // API call failed...
+                    //     });
                 }
             })
         }

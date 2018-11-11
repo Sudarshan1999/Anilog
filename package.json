@@ -14,6 +14,9 @@
     "browserify-fs": "^1.0.0",
     "clarifai": "^2.9.0",
     "firebase": "^5.5.8",
+    "googleplaces-promises": "^1.0.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
     "vue": "^2.5.2",
     "vue-cli": "^2.9.6",
     "vue-router": "^3.0.1"
