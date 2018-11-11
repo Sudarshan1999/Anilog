@@ -6,6 +6,7 @@
 			<h3>Search by URL</h3>
 			<input id="url" type="text" v-model="url" placeholder="Image URL"><br>
 			<button v-on:click="searchUrl">submit</button><br>
+			{{animal}}
 			<img v-bind:src="url">
 		</div>
 	</div>
@@ -17,70 +18,46 @@ export default {
 	data() {
 		return {
 			url: '',
+			animal: '',
 		}
 	},
 	methods: {
 		searchUrl() {
 			const { getConceptsUrl } = require('../services/searchUrl.js')
+			const { getAnimal } = require('../services/uploadImage.js')
+			const { placesPromises } = require('../constants/places.js')
 
-			var concepts,
-				names = [],
-				animal
+			getConceptsUrl(this.url)
+				.then(concepts => getAnimal(concepts))
+				.then(animal => {
+					this.animal = animal
 
-			getConcepts(this.url).then(concepts => {
-				if (concepts != null) {
-					concepts.forEach(concept => names.push(concept['name']))
+					return placesPromises.placeSearch({
+						location: [33.4511924, -111.9480369],
+						types: 'zoos containing ' + animal,
+						input: 'zoos',
+					})
+				})
+				.then(response => {
+					console.log(response)
 
-					const animalNames = require('../data/animalNames.json')
+					const geometry = response['results'][1]['geometry']
 
-					for (var i = 0; i < names.length; i++) {
-						if (animalNames.indexOf(names[i]) != -1) {
-							animal = names[i]
-							break
-						}
+					const location = {
+						lat: location['location']['lat'],
+						lng: location['location']['lng'],
 					}
 
-                    var info={}
-					console.log(animal)
-					var GooglePlacesPromises = require('googleplaces-promises')
-					var placesPromises = new GooglePlacesPromises(
-						'AIzaSyBiXTklAzda7cc6iT5SjuvT7K-w8ZsX-wI'
-					)
-					var searchParams = {
-							location: [33.4512, -111.948],
-							types: 'zoos containing ' + animal,
-							input: 'zoos',
-						},
-						placeSearch = placesPromises.placeSearch(searchParams)
-					console.log(searchParams)
-					placeSearch
-						.then(function(response) {
-							console.log(response)
-                            info['lat']=response['results'][1]['geometry']['location']['lat']
-                            info['lng']=response['results'][1]['geometry']['location']['lng']
-                            console.log(info['lat']+" "+info['lng'])
+					console.log(location)
 
-                        })
-						.fail(function(error) {
-							console.log(error)
-                        })
-                        
-                        // var searchDetailParams = {
-                        //         id: info['id'],
-                        //         name: info['name']
-                        //     },
-                        //     placeDetailSearch = placesPromises.placeSearch(searchDetailParams);
-                        // console.log(searchDetailParams)
-                        // placeDetailSearch
-                        //     .then(function(response){
-                        //         console.log(response)
-                        //         console.log(response['results'])
-                        //     })
-                        //     .fail(function(error){
-                        //         console.log(error)
-                        //     })
-				}
-			})
+					this.$router.push({
+						name: 'Results',
+						params: {
+							animal,
+							location,
+						},
+					})
+				})
 		},
 	},
 }

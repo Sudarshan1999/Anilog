@@ -2,7 +2,7 @@
 	<div>
 
 		<!-- Header - set the background image for the header in the line below -->
-		<header class="py-5 bg-image-full" style="background-image: url('../assets/Banner.png');">
+		<header class="py-5 bg-image-full" style="background-image: url('https://i.imgur.com/7mXPoI5.jpg');">
 			<div style="height: 200px;"></div>
 		</header>
 

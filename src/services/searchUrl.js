@@ -3,11 +3,14 @@ const {
 } = require('../constants/clarifai.js')
 
 export function getConceptsUrl(url) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve, _reject) => {
 		clarifaiObject.models
 			.predict(Clarifai.GENERAL_MODEL, url)
-			.then(response => {
-				resolve(response['outputs'][0]['data']['concepts'])
+			.then((response) => {
+				const concepts = response['outputs'][0]['data']['concepts'];
+				if (concepts) {
+					resolve(concepts);
+				}
 			})
 	})
 }

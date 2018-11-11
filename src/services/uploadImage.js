@@ -21,7 +21,7 @@ export function getConceptsB64(base64) {
 			.predict(Clarifai.GENERAL_MODEL, {
 				base64
 			})
-			.then(response => {
+			.then((response) => {
 				const concepts = response['outputs'][0]['data']['concepts'];
 				if (concepts) {
 					resolve(concepts);

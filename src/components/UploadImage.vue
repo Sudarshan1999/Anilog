@@ -36,7 +36,16 @@ export default {
 			encodeAsURL(file)
 				.then(base64 => getConceptsB64(base64))
 				.then(concepts => getAnimal(concepts))
-				.then(animal => (this.animal = animal))
+				.then(animal => {
+					this.animal = animal
+
+					this.$router.push({
+						name: 'Results',
+						params: {
+							animal,
+						},
+					})
+				})
 		},
 		// onUpload() {},
 	},
