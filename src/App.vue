@@ -21,9 +21,6 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#/uploadImage">Upload Image</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#/results">Results</a>
-						</li>
 					</ul>
 				</div>
 			</div>
