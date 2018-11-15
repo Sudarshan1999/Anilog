@@ -4,12 +4,23 @@
 
 	<div>
 
-		<br><br><br> Animal: {{animal}}<br> Place: Phoenix Zoo<br> Coordinates: {{location['lat'] ? location['lat']: ''}}, {{location['lng'] ? location['lng']: ''}}
-
 		<br><br><br>
 
-		<img :src="imageUrl">
+		<div v-if="defined">
+
+			Animal: {{animal}}<br> Place: Phoenix Zoo<br> Coordinates: {{location['lat'] ? location['lat']: ''}}, {{location['lng'] ? location['lng']: ''}}
+
+			<br><br><br>
+
+			<img :src="imageUrl">
+		</div>
+
+		<div v-else>
+			Results not loaded yet
+		</div>
+
 	</div>
+
 </template>
 
 <script>
@@ -26,11 +37,14 @@ export default {
 		const animal = this.$route.params.animal
 		const location = this.$route.params.location
 
+		const defined = animal && location['lat'] && location['lng']
+
 		return {
 			// query,
 			imageUrl: 'https://i.imgur.com/omihjNj.png',
 			animal,
 			location,
+			defined,
 		}
 	},
 }

@@ -12,9 +12,8 @@
 </template>
 
 <script>
-const { getConceptsUrl, getLocation } = require('../services/searchUrl.js')
-const { getAnimal } = require('../services/uploadImage.js')
-const { placesPromises } = require('../constants/places.js')
+const { getConceptsUrl, getLocation, getAnimal } = require('../services.js')
+const { placesPromises } = require('../constants.js')
 
 export default {
 	name: 'SearchUrl',

@@ -17,9 +17,9 @@ const {
 	encodeAsURL,
 	getConceptsB64,
 	getAnimal,
-} = require('../services/uploadImage.js')
-const { getLocation } = require('../services/searchUrl.js')
-const { placesPromises } = require('../constants/places.js')
+	getLocation,
+} = require('../services.js')
+const { placesPromises } = require('../constants.js')
 
 export default {
 	name: 'UploadImage',
