@@ -1,19 +1,25 @@
 <template>
-	<div>
-		<br><br><br>
-
-		<div>
-			<h3>Search by URL</h3>
-			<input id="url" type="text" v-model="url" placeholder="Image URL"><br>
-			<button v-on:click="searchUrl">submit</button><br> {{animal}}
-			<img v-bind:src="url">
+	<div class="container has-text-centered">
+		<div class="column is-6 is-offset-3">
+			<h1 class="title">
+				Search a URL
+			</h1>
+			<div class="box">
+				<div class="field is-grouped">
+					<p class="control is-expanded">
+						<input class="input" type="text" v-model="url" placeholder="Enter the Image URL">
+					</p>
+					<p class="control">
+						<button class="button is-info" v-on:click="searchUrl">Search</button>
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 const { getConceptsUrl, getLocation, getAnimal } = require('../services.js')
-const { placesPromises } = require('../constants.js')
 
 export default {
 	name: 'SearchUrl',

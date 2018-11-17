@@ -1,47 +1,30 @@
 <template>
-	<div>
-
-		<!-- Header - set the background image for the header in the line below -->
-		<header class="py-5 bg-image-full" style="background-image: url('https://i.imgur.com/7mXPoI5.jpg');">
-			<div style="height: 200px;"></div>
-		</header>
-
-		<!-- Content section -->
-		<section class="py-5">
-			<div class="container">
-				<h1>Search Animal by Image URL</h1>
-				<p class="lead">Have a picture of an animal but not sure where to find more?</p>
-				<p>With Anilog, powered by Clarifai Image Recognition and GCP's Places and Maps API, each image uploaded is complared to a database of other animals. From there, we take our best guess at what that animal is and reccomend another place where that animal can be found.</p>
+	<div class="container has-text-centered">
+		<div class="column is-6 is-offset-3">
+			<h1 class="title">
+				Have a picture of an animal but not sure where to find more?
+			</h1>
+			<h2 class="subtitle">
+				With Anilog, powered by Clarifai Image Recognition and GCP's Places and Maps API, each image uploaded is complared to a database of other animals. From there, we take our best guess at what that animal is and reccomend another place where that animal can be found.
+			</h2>
+			<div class="box">
+				<div class="field is-grouped">
+					<p class="control is-expanded">
+						<input class="input" type="text" placeholder="Enter the Image URL">
+					</p>
+					<p class="control">
+						<a class="button is-info">
+							Search
+						</a>
+					</p>
+				</div>
 			</div>
-		</section>
-
-		<!-- Image Section - set the background image for the header in the line below -->
-		<section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
-			<!-- Put anything you want here! There is just a spacer below for demo purposes! -->
-			<div style="height: 200px;"></div>
-		</section>
-
-		<!-- Content section -->
-		<section class="py-5">
-			<div class="container">
-				<h1>Find Animal through an Uploaded Image</h1>
-				<p class="lead">Take a picture of an animal but not sure where to find more?</p>
-				<p>With Anilog, powered by Clarifai Image Recognition and GCP's Places and Maps API, each image uploaded is complared to a database of other animals. From there, we take our best guess at what that animal is and reccomend another place where that animal can be found.</p>
-			</div>
-		</section>
-
-		<!-- Footer -->
-		<footer class="py-5 bg-dark">
-			<div class="container">
-				<p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-			</div>
-		</footer>
-
+		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'HelloWorld',
+	name: 'Home',
 }
 </script>

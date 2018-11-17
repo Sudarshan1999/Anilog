@@ -4,8 +4,6 @@
 
 	<div>
 
-		<br><br><br>
-
 		<div v-if="defined">
 
 			Animal: {{animal}}<br> Place: Phoenix Zoo<br> Coordinates: {{location['lat'] ? location['lat']: ''}}, {{location['lng'] ? location['lng']: ''}}
@@ -16,7 +14,11 @@
 		</div>
 
 		<div v-else>
-			Results not loaded yet
+			<div class="column is-6 is-offset-3">
+				<h1 class="title">
+					Results not loaded yet
+				</h1>
+			</div>
 		</div>
 
 	</div>

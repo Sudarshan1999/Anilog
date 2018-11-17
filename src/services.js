@@ -66,11 +66,18 @@ export function getAnimal(concepts) {
 
 export function getLocation(animal, coordinates) {
 	return placesPromises.placeSearch({
-		location: [33.4511924, -111.9480369],
+		location: coordinates,
 		types: 'zoos containing ' + animal,
 		input: 'zoos',
-	}).then(response => ({
-		lat: response['results'][1]['geometry']['location']['lat'],
-		lng: response['results'][1]['geometry']['location']['lng'],
-	}))
+	}).then(response => {
+		if (response['status'] == "REQUEST_DENIED") {
+			console.error('Invalid response', response)
+			throw new TypeError("Invalid response", response)
+		} else {
+			return {
+				lat: response['results'][1]['geometry']['location']['lat'],
+				lng: response['results'][1]['geometry']['location']['lng'],
+			}
+		}
+	})
 }
